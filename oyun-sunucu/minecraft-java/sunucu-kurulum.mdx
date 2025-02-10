@@ -1,0 +1,57 @@
+---
+title: "Minecraft:Java Sunucu Kurulumu"
+description: "Brolve.com üzerinden satın aldığınız sunucu hizmetine nasıl Minecraft:Java sunucusu kurarsınız?"
+---
+
+<Steps>
+  <Step title="Sürüm Belirlenmesi ve Uygun Yazılım Seçimi">
+    * Öncelikle sunucunun taban (en alt) sürümünün ve tabanının ne olacağını belirlemelisiniz. Sunucunuz **Bukkit** tabanlı mı olacak yoksa **Forge/Fabric** tabanlı mı? Eğer modlu bir sunucu kuracaksanız modların gereksinimine göre Forge veya Fabric kullanmanız gerekir. **Biz bu makalede kullanım çoğunluğundan ötürü bu konuda Bukkit tabanını ele alacağız.**
+
+    * Sürüm belirlerken sunucunuzun oyun modunu ve pluginlerin gereksinimlerini gözetmeniz gerekir.
+
+    * Biz Brolve olarak 1.8-1.16.5  arası için [PaperMC](https://papermc.io/downloads/paper), 1.17+ için[ Pufferfish](https://pufferfish.host/downloads) öneriyoruz. Biz bu makalede Paper ile gösterim sağlayacağız.
+
+    <Info>
+      Kafanız karışmasın. Paper, Purpur, Pufferfish gibi yazılımlar Bukkit tabanı üzerinden forklanmıştır.
+    </Info>
+  </Step>
+
+  <Step title="Fork Kurulumu">
+    * Öncelikle [PaperMC](https://papermc.io/downloads/all)'nin sitesine giriyoruz ve sunucumuzun taban sürümüne uygun olan versiyonu indirin.
+
+    * Boş bir klasör oluşturun, ardından indirdiğiniz .jar uzantılı fork dosyasını klasöre koyun ve adını `server.jar` yapın.
+
+    * Bir yazı dosyası oluşturun ve dosya adını start.bat yapın. Ardından bu start.bat dosyasının içine aşağıdaki optimize edilmiş başlatma kodunu yazın ardından kendi isteğinize göre set RAMs, set RAMx, set FORK değişkenlerini düzenleyin. **1.8-1.15.2 arasında Xmx ile** Xms flaglarının eşit olması **isteğe bağlıyken**, 1.16+ sürümlerde Xmx-Xms sürümleri **eşit olması gerekmektedir.**
+
+    ```powershell
+    @echo off
+    title Brolve.com - Server
+    # RAM miktarını GB cinsinden yazarken G , MB cinsinden yazar M yazınız.
+    set RAMs="4G"
+    set RAMx="4G"
+    set FORK="server.jar"
+    echo Sunucu baslatiliyor...
+    java -Xms%RAMs% -Xmx%RAMx% -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -jar %FORK% --nogui
+    echo Sunucu kapaniyor...
+    PAUSE
+    ```
+
+    * Bu start.bat dosyasını çalıştırın. Ardından birkaç dosya oluşacak ve sunucu konsolu duracaktır.
+  </Step>
+
+  <Step title="Konfigürasyon">
+    * Klasördeki dosyalar arasındaki **eula.txt** dosyasını açın ve orada bulunan `eula=false` yazısını `eula=true` olarak düzeltin. start.bat dosyasını tekrar başlatın.
+
+    * Sunucu tamamen açıldıktan sonra `stop` komutuyla sunucuyu kapatın.
+
+    * **server.properties** isimli dosyayı düzenlemek için açın. `server-ip=` kısmına sunucunun bulunduğu VDS hizmetinin IP adresini yazınız. `server-port=` kısmına da N[asıl Bağlantı Noktası Oluşturulur](https://docs.brolve.com/oyun-sunucu/minecraft-java/port-acma) adlı makalemizden yardım alarak sunucu için açtığınız portu yazınız.
+
+    * &#x20;Korsan istemcilerle giriş yapılmasını isterseniz `online-mode=true` yerine `online-mode=false` yazınız ve kaydetip çıkınız.&#x20;
+
+    * start.bat dosyasını çalıştırın. Artık sunucunuz başarılı bir şekilde Minecraft: Java sunucunuz açılmıştır. **plugins** klasörüne eklentiler yükleyerek sunucunuza özellikler kazandırabilirsiniz.
+  </Step>
+</Steps>
+
+<Info>
+  Eğer yardıma ihtiyaç duyarsanız [Discord](https://discord.gg/brolve) topluluğumuz üzerinden bir destek talebi oluşturarak bizimle iletişime geçin.
+</Info>

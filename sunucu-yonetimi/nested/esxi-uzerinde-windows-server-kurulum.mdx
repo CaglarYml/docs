@@ -1,0 +1,46 @@
+---
+title: 'ESXI Üzerinde Windows Server Kurulumu'
+description: 'Brolve.com üzerinden satın aldığınız Nested hizmetinde Vmware ESXI üzerinde Windows Server nasıl kurarsınız?'
+---
+
+<Tip>
+  Öncelikle eğer henüz bir hizmete sahip değilseniz [Nasıl Satın Alım Yapılır](https://docs.brolve.com/satin-alim) konulu makalemizi inceleyebilirsiniz.&#x20;
+</Tip>
+
+<Steps>
+  <Step title="Windows Server ISO İndirme">
+    Microsoft'un resmi sayfası üzerinden Windows Server ISO imajını indiriyoruz. Bağlantı: Windows Server [2016](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2016), [2019](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2019), [2022](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2022), [2025](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2025)
+  </Step>
+
+  <Step title="ISO Dosyasını Datastore'a Ekleme">
+    Tarayıcı üzerinden ESXI panelinize bağlanın, ardından soldaki bardan **Storage** butonuna tıklayın. Sonrasında üst tarafta bulunan **Datastore Browser** butonuna tıklayın. Sol üstte bulunan Upload butonuna tıklayın ve açılan pencereden ISO dosyasını seçin ve sunucuya yükleyin.
+  </Step>
+
+  <Step title="Sanal Makine (VM) Oluşturma">
+    * ESXI panelinizin anasayfasına ulaşın.&#x20;
+
+    * Üstte bulunan **Create/Register VM** butonuna tıklayınız.
+
+    * **Create a new virtual machine** seçeneğini seçip **Next** tuşuna tıklayın.
+
+    * Name kısmına makinenin adını girin. Guest OS Family kısmını **Microsoft Windows**, Guest OS Version kısmında **Windows Server %Sürüm% (64-bit)** seçeneğini seçin ve **Next** tuşuna tıklayın.
+
+    * Gelen sayfada CPU, RAM, Disk, Driver gibi seçenekleri düzenleyin.
+
+    * **CD/DVD Drive** bölümünde Host Device yerine **Datastore ISO file** seçeneğini seçin ve ardından datastore'a yüklediğimiz ISO imajını seçin, **Select** tuşuna basın, **Next** tuşuna basın.&#x20;
+
+    * Son kontrolleri yaparak **Finish** tuşu üzerinden bitirin.
+  </Step>
+
+  <Step title="Ubuntu Kurulum">
+    Sanal makineye güç verin ve makinayı önizleyin. Sırasıyla gelen adımları izleyin. Bu süreçte sizden dil, klavye düzeni, ağ ayarı, disk ayarı, kullanıcı ve şifre bilgisi gibi detayları girmenizi isteyecektir.
+  </Step>
+</Steps>
+
+<Note>
+  ESXi üzerinde Windows Server Kurulum hizmetimiz vardır. İlgileniyorsanız bizimle iletişime geçin!
+</Note>
+
+<Info>
+  Eğer yardıma ihtiyaç duyarsanız [Discord](https://discord.gg/brolve) topluluğumuz üzerinden bir destek talebi oluşturarak bizimle iletişime geçin.
+</Info>

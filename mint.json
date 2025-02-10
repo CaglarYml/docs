@@ -1,0 +1,167 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Brolve Docs",
+  "logo": {
+    "dark": "/logo/logo-br.png",
+    "light": "/logo/logo-br.png"
+  },
+  "favicon": "/logo/logo.png",
+  "colors": {
+    "primary": "#070ac9",
+    "light": "#2e43b8",
+    "dark": "#070ac9",
+    "anchors": {
+      "from": "#070ac9",
+      "to": "#2e43b8"
+    }
+  },
+  "topbarLinks": [
+    {
+      "name": "Destek",
+      "url": "https://brolve.com/panel/hesabim/destek-talebi-olustur"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Müşteri Paneli",
+    "url": "https://brolve.com/panel"
+  },
+  "tabs": [
+    {
+      "name": "Dokümantasyon",
+      "url": "/"
+    },
+    {
+      "name": "Sunucu Yönetimi",
+      "url": "sunucu-yonetimi"
+    },
+    {
+      "name": "Web Hosting ve Domain",
+      "url": "web"
+    },
+    {
+      "name": "Oyun Sunucuları",
+      "url": "oyun-sunucu"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "Anasayfa",
+      "icon": "main",
+      "url": "https://brolve.com"
+    },
+    {
+      "name": "Topluluk",
+      "icon": "discord",
+      "url": "https://discord.gg/brolve"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Başlarken",
+      "pages": [
+        "baslangic",
+        "biz-kimiz",
+        "satin-alim",
+        "sss"
+      ]
+    },
+    {
+      "group": "Yardımcı Kaynaklar",
+      "pages": [
+        "yardimci-kaynaklar/java-kurulum",
+        "yardimci-kaynaklar/firewall",
+        "yardimci-kaynaklar/port",
+        "yardimci-kaynaklar/minecraft-java-kurulum",
+        "yardimci-kaynaklar/pterodactyl-kurulum"
+      ]
+    },
+    {
+      "group": "Sanal Sunucu",
+      "pages": [
+        "sunucu-yonetimi/sifirlama",
+        "sunucu-yonetimi/sifre-degistirme",
+        "sunucu-yonetimi/yedekleme",
+        "sunucu-yonetimi/yukseltme"
+      ]
+    },
+    {
+      "group": "Dedicated",
+      "pages": [
+        "sunucu-yonetimi/dedicated/"
+      ]
+    },
+    {
+      "group": "Nested",
+      "pages": [
+        "sunucu-yonetimi/nested/esxi-uzerinde-ubuntu-server-kurulum",
+        "sunucu-yonetimi/nested/esxi-uzerinde-windows-server-kurulum",
+        "sunucu-yonetimi/nested/windows-ip-tanimlama",
+        "sunucu-yonetimi/nested/ubuntu-ip-tanimlama"
+      ]
+    },
+    {
+      "group": "Yazılımlar",
+      "pages": [
+        "sunucu-yonetimi/yazilimlar/cpanel-kurulum",
+        "sunucu-yonetimi/yazilimlar/linuxa-plesk-kurulum",
+        "sunucu-yonetimi/yazilimlar/windowsa-plesk-kurulum",
+        "sunucu-yonetimi/yazilimlar/directadmin-kurulum",
+        "sunucu-yonetimi/yazilimlar/docker-kurulum"
+      ]
+    },
+    {
+      "group": "Minecraft",
+      "pages": [
+        "oyun-sunucu/minecraft-java/sunucu-kurulum",
+        "oyun-sunucu/minecraft-java/alt-alan-adi",
+        "oyun-sunucu/minecraft-bedrock/sunucu-kurulum"
+      ]
+    },
+    {
+      "group": "FiveM Sunucu",
+      "pages": [
+        "oyun-sunucu/fivem/sunucu-kurulum"
+      ]
+    },
+    {
+      "group": "Rust Sunucu",
+      "pages": [
+        "oyun-sunucu/rust/sunucu-kurulum"
+      ]
+    },
+    {
+      "group": "cPanel",
+      "pages": [
+        "web/cpanel/cpanele-baglanma",
+        "web/cpanel/ftp-ile-baglanma",
+        "web/cpanel/php-surum-degistirme",
+        "web/cpanel/php-eklenti-ayarlama",
+        "web/cpanel/alt-alan-adi-olusturma"
+      ]
+    },
+    {
+      "group": "Plesk",
+      "pages": [
+        "web/plesk/pleske-baglanma",
+        "web/plesk/ftp-ile-baglanma",
+        "web/plesk/php-surum-degistirme",
+        "web/plesk/php-eklenti-ayarlama",
+        "web/plesk/alt-alan-adi-olusturma"
+      ]
+    },
+    {
+      "group": "Alan Adı",
+      "pages": [
+        "web/alan-adi/nameserver-ayarlama",
+        "web/alan-adi/alt-alan-adi-olusturma",
+        "web/alan-adi/cloudflare-yonlendirme"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "discord": "https://discord.gg/brolve",
+    "website": "https://brolve.com",
+    "linkedin": "https://linkedin.com/company/brolve",
+    "instagram": "https://instagram.com/brolve.global"
+  }
+}

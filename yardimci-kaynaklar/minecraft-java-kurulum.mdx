@@ -1,0 +1,247 @@
+---
+title: "Minecraft Sunucu Kurulum"
+description: "Tarafımızca sizlere kolaylık sağlamak adına hizmetinizde kullanmak için Minecraft:Java sunucu kurulum betikleri."
+---
+
+<CodeGroup>
+  ```powershell MinecraftSetup.bat
+  @echo off
+  setlocal enabledelayedexpansion
+
+  title Brolve - PaperMC Sunucu Kurulum Betiği
+
+  echo Bu betik Brolve Devs. tarafindan musteriler icin hazirlanmistir.
+  echo Devam etmek icin ENTER tusuna tiklayin ardindan gerekli yonlendirmeler yapilacaktir.
+  PAUSE
+  cls
+
+  :: Java Kurulumu ayrı cmd'de çalıştırılıyor
+  echo Java kurulumu baslatiliyor...
+  start cmd /c "%~f0" :java_installer
+
+  :: Kullanıcıdan PaperMC sürüm ve build numarası alma
+  echo Lutfen PaperMC surumunu girin (Ornek: 1.8.8, 1.16.5, 1.17.1, 1.18.2, 1.19.4, 1.20.6, 1.21.4)
+  set /p PAPER_VERSION="Surum: "
+
+  echo Lutfen bu surum icin build numarasini girin (Ornek: 445, 794, 411, 388, 550, 151, 114)
+  set /p BUILD_NUMBER="Build Numarasi: "
+
+  :: PaperMC URL olusturma
+  set PAPER_URL=https://papermc.io/api/v2/projects/paper/versions/!PAPER_VERSION!/builds/!BUILD_NUMBER!/downloads/paper-!PAPER_VERSION!-!BUILD_NUMBER!.jar
+
+  :: Server klasörü oluşturma
+  mkdir "%USERPROFILE%\Desktop\Server"
+  cd "%USERPROFILE%\Desktop\Server"
+
+  :: PaperMC indirme
+  echo PaperMC indiriliyor...
+  curl -o server.jar !PAPER_URL!
+  if %errorlevel% neq 0 (
+      echo PaperMC indirilemedi. Lutfen surum ve build numarasini kontrol edin.
+      exit /b 1
+  )
+
+  :: eula.txt dosyası oluşturma
+  echo eula=true > eula.txt
+
+  :: Kurulum tamamlandı
+  if exist server.jar (
+      echo PaperMC basariyla kuruldu.
+      echo Sunucunun tam kurulumu icin lutfen https://docs.brolve.com/oyun-sunucu/minecraft-java/sunucu-kurulum adresini ziyaret edin.
+  ) else (
+      echo Kurulum basarisiz oldu.
+      exit /b 1
+  )
+
+  pause
+  endlocal
+
+  :: Java yükleme fonksiyonu
+  :java_installer
+  @echo off
+  setlocal enabledelayedexpansion
+
+  title Brolve - Java Kurma Betigi
+
+  echo Bu betik Brolve Devs. tarafindan musteriler icin hazirlanmistir.
+  echo Devam etmek icin ENTER tusuna tiklayin ardindan
+  echo gerekli yonlendirmeler yapilacaktir.
+  PAUSE
+  cls
+
+  :: Kullanıcıdan Java sürümünü alma
+  echo Hangi Java surumunu indirmek istiyorsunuz? (Ornek: 17)
+  set /p JAVA_VERSION="Java Surumu: "
+
+  :: Eclipse Adoptium'dan indirme URL'si oluşturma
+  set JAVA_URL=https://api.adoptium.net/v3/binary/latest/!JAVA_VERSION!/ga/windows/x64/jdk/hotspot/normal/eclipse
+  set JAVA_INSTALLER=OpenJDK-!JAVA_VERSION!-windows-x64.exe
+
+  :: Java'yı indirme
+  curl -o !JAVA_INSTALLER! !JAVA_URL!
+  if %errorlevel% neq 0 (
+      echo Java indirilemedi. Lutfen surumu kontrol edin veya internet baglantinizi kontrol edin.
+      exit /b 1
+  )
+
+  :: Java'yı yükleme
+  echo Java yukleniyor...
+  start /wait !JAVA_INSTALLER! /s
+  if %errorlevel% neq 0 (
+      echo Java yuklenirken hata olustu.
+      exit /b 1
+  )
+
+  :: PATH değişkenine ekleme
+  echo PATH degiskeni guncelleniyor...
+  setx PATH "%PATH%;C:\Program Files\Eclipse Adoptium\jdk-!JAVA_VERSION!-hotspot\bin" /M
+
+  :: Yükleme dosyasını silme
+  delete !JAVA_INSTALLER!
+
+  :: Kurulumun başarıyla tamamlandığını kontrol etme
+  java -version
+  if %errorlevel% neq 0 (
+      echo Java kurulumu basarisiz.
+      exit /b 1
+  ) else (
+      echo Java basariyla kuruldu!
+  )
+
+  pause
+  endlocal
+  exit /b
+
+  ```
+
+  ```
+  #!/bin/bash
+
+  set -e
+
+  echo "Brolve - PaperMC Sunucu Kurulum Betiği"
+  echo "Bu betik Brolve Devs. tarafindan musteriler icin hazirlanmistir."
+  echo "Devam etmek icin ENTER tusuna basin."
+  read -p "Devam etmek icin ENTER tusuna basin."
+  clear
+
+  # Java Kurulumu
+  bash -c "$0 java_installer"
+
+  # Kullanıcıdan PaperMC sürüm ve build numarası alma
+  echo "Lutfen PaperMC surumunu girin (Ornek: 1.8.8, 1.16.5, 1.17.1, 1.18.2, 1.19.4, 1.20.6, 1.21.4)"
+  read -p "Surum: " PAPER_VERSION
+  echo "Lutfen bu surum icin build numarasini girin (Ornek: 445, 794, 411, 388, 550, 151, 114)"
+  read -p "Build Numarasi: " BUILD_NUMBER
+
+  # PaperMC URL oluşturma
+  PAPER_URL="https://papermc.io/api/v2/projects/paper/versions/$PAPER_VERSION/builds/$BUILD_NUMBER/downloads/paper-$PAPER_VERSION-$BUILD_NUMBER.jar"
+
+  # Server klasörü oluşturma
+  mkdir -p ~/Server
+  cd ~/Server
+
+  # PaperMC indirme
+  echo "PaperMC indiriliyor..."
+  curl -o server.jar "$PAPER_URL"
+
+  # eula.txt dosyası oluşturma
+  echo "eula=true" > eula.txt
+
+  echo "Kurulum tamamlandi. Sunucunun tam kurulumu icin lutfen https://docs.brolve.com/oyun-sunucu/minecraft-java/sunucu-kurulum adresini ziyaret edin."
+
+  exit 0
+
+  # Java yükleme fonksiyonu
+  if [ "$1" == "java_installer" ]; then
+      echo "Java Kurma Betiği"
+      echo "Bu betik Brolve Devs. tarafindan musteriler icin hazirlanmistir."
+      read -p "Hangi Java surumunu indirmek istiyorsunuz? (Ornek: 17) " JAVA_VERSION
+
+      JAVA_URL="https://api.adoptium.net/v3/binary/latest/$JAVA_VERSION/ga/linux/x64/jdk/hotspot/normal/eclipse"
+      JAVA_INSTALLER="OpenJDK-$JAVA_VERSION-linux-x64.tar.gz"
+
+      echo "Java indiriliyor..."
+      curl -o "$JAVA_INSTALLER" "$JAVA_URL"
+
+      tar -xzf "$JAVA_INSTALLER" -C /opt
+      JAVA_DIR=$(tar -tzf "$JAVA_INSTALLER" | head -1 | cut -f1 -d"/")
+
+      echo "PATH degiskeni guncelleniyor..."
+      echo "export PATH=/opt/$JAVA_DIR/bin:\$PATH" >> ~/.bashrc
+      source ~/.bashrc
+
+      java -version
+      echo "Java basariyla kuruldu!"
+      exit 0
+  fi
+
+  ```
+
+  ```bash MinecraftSetup.sh
+  #!/bin/bash
+
+  set -e
+
+  echo "Brolve - PaperMC Sunucu Kurulum Betiği"
+  echo "Bu betik Brolve Devs. tarafindan musteriler icin hazirlanmistir."
+  echo "Devam etmek icin ENTER tusuna basin."
+  read -p "Devam etmek icin ENTER tusuna basin."
+  clear
+
+  # Java Kurulumu
+  bash -c "$0 java_installer"
+
+  # Kullanıcıdan PaperMC sürüm ve build numarası alma
+  echo "Lutfen PaperMC surumunu girin (Ornek: 1.8.8, 1.16.5, 1.17.1, 1.18.2, 1.19.4, 1.20.6, 1.21.4)"
+  read -p "Surum: " PAPER_VERSION
+  echo "Lutfen bu surum icin build numarasini girin (Ornek: 445, 794, 411, 388, 550, 151, 114)"
+  read -p "Build Numarasi: " BUILD_NUMBER
+
+  # PaperMC URL oluşturma
+  PAPER_URL="https://papermc.io/api/v2/projects/paper/versions/$PAPER_VERSION/builds/$BUILD_NUMBER/downloads/paper-$PAPER_VERSION-$BUILD_NUMBER.jar"
+
+  # Server klasörü oluşturma
+  mkdir -p ~/Server
+  cd ~/Server
+
+  # PaperMC indirme
+  echo "PaperMC indiriliyor..."
+  curl -o server.jar "$PAPER_URL"
+
+  # eula.txt dosyası oluşturma
+  echo "eula=true" > eula.txt
+
+  echo "Kurulum tamamlandi. Sunucunun tam kurulumu icin lutfen https://docs.brolve.com/oyun-sunucu/minecraft-java/sunucu-kurulum adresini ziyaret edin."
+
+  exit 0
+
+  # Java yükleme fonksiyonu
+  if [ "$1" == "java_installer" ]; then
+      echo "Java Kurma Betiği"
+      echo "Bu betik Brolve Devs. tarafindan musteriler icin hazirlanmistir."
+      read -p "Hangi Java surumunu indirmek istiyorsunuz? (Ornek: 17) " JAVA_VERSION
+
+      JAVA_URL="https://api.adoptium.net/v3/binary/latest/$JAVA_VERSION/ga/linux/x64/jdk/hotspot/normal/eclipse"
+      JAVA_INSTALLER="OpenJDK-$JAVA_VERSION-linux-x64.tar.gz"
+
+      echo "Java indiriliyor..."
+      curl -o "$JAVA_INSTALLER" "$JAVA_URL"
+
+      tar -xzf "$JAVA_INSTALLER" -C /opt
+      JAVA_DIR=$(tar -tzf "$JAVA_INSTALLER" | head -1 | cut -f1 -d"/")
+
+      echo "PATH degiskeni guncelleniyor..."
+      echo "export PATH=/opt/$JAVA_DIR/bin:\$PATH" >> ~/.bashrc
+      source ~/.bashrc
+
+      java -version
+      echo "Java basariyla kuruldu!"
+      exit 0
+  fi
+
+  ```
+</CodeGroup>
+<Info>
+  Eğer yardıma ihtiyaç duyarsanız [Discord](https://discord.gg/brolve) topluluğumuz üzerinden bir destek talebi oluşturarak bizimle iletişime geçin.
+</Info>

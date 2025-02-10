@@ -1,0 +1,75 @@
+---
+title: "Windows Üzerinde Plesk Kurulum"
+description: "Brolve.com üzerinden alınan Windows Server işletim sistemi kurulu sunucu hizmetine cPanel Web Yönetim Paneli nasıl kurulur?"
+---
+
+<Tip>
+  Öncelikle eğer henüz bir hizmete sahip değilseniz [Nasıl Satın Alım Yapılır](https://docs.brolve.com/satin-alim) konulu makalemizi inceleyebilirsiniz.&#x20;
+</Tip>
+
+<Warning>
+  Makale hazırlanırken Plesk'in resmi kurulum makalesi esas alınmıştır.
+</Warning>
+
+<Steps>
+  <Step title="Gereksinimler">
+    **1) Lisans:**
+    [plesk.com](https://plesk.com) üzerinden bir adet lisans satın almanız gerekir.  Ardından lisansınızı hizmetinizin ip adresine yönlendirin.
+
+
+
+    **2) Sistem Gereksinimleri:**
+
+    | Sürüm:                | RAM (GB)                            | Disk Alanı (GB)                       |
+    | --------------------- | ----------------------------------- | ------------------------------------- |
+    | Windows Server 2022   | **Minimum**: 2GB, **Önerilen**: 4GB | **Minimum**: 20GB, **Önerilen**: 40GB |
+    | Windows Server 2019   | **Minimum**: 2GB, **Önerilen**: 4GB | **Minimum**: 20GB, **Önerilen**: 40GB |
+    | Windows Server 2016   | **Minimum**: 2GB, **Önerilen**: 4GB | **Minimum**: 20GB, **Önerilen**: 40GB |
+    | Windows Server 2012R2 | **Minimum**: 2GB, **Önerilen**: 4GB | **Minimum**: 20GB, **Önerilen**: 40GB |
+  </Step>
+
+  <Step title="Plesk Kurulum">
+    Otomatik kurulum her şeyi yaptığı için sizin ekstra bir şeye ihtiyacınız yoktur.
+
+    ### Tek Tıkla Kurulum:
+
+    ```bash
+    # Kurulumcuyu indirin
+    https://installer-win.plesk.com/plesk-installer.exe
+    # Ardından bu komut ile başlatın
+    .plesk-installer.exe --select-product-id=panel --select-release-latest --installation-type=recommended
+    ```
+
+    ### Tarayıcı Üzerinden Kurulum:
+
+    * Aşağıdaki komut ile kurulumcuyu indirin ve çalıştırın.
+
+    ```bash
+    https://installer-win.plesk.com/plesk-installer.exe
+    ```
+
+    * 8447 portuyla web arayüzüne ulaşın. Örnek URI `http://ip-adresi:8447` veya `http://sunucu-adi.com:8447`.
+
+    * Arayüze giriş bilgileriniz: `root` kullanıcı ve cihaz şifrenizdir.
+
+    * "Install or upgrade product" butonuna tıklayınız.
+
+    * Son çıkan **stable** sürümü seçip, "Continue" butonuyla devam edin.
+
+    * Yükleyeceğiniz paketleri seçip, "Continue" butonuyla devam edin.
+
+    * Bir konsol çıktısı göreceksiniz, kurulum bitene kadar bekleyiniz.
+  </Step>
+
+  <Step title="Kurulum Sonrası">
+    Kurulum bittikten sonra `http://ip-adresi:8443` veya `http://sunucu-adi.com:8443` URI'leri üzerinden arayüze ulaşın ve Yönetici hesabını kaydolunuz. Sonrasında `admin` kullanıcı adı ve az önce girdiğiniz şifre ile giriş yapabilirsiniz. Lisans aşamasında 30 günlük deneme lisansı başlatabilirsiniz veya 1. aşamada aldığınız lisansın kodunu giriniz.
+  </Step>
+</Steps>
+
+<Note>
+  Sunucu hizmetinize Plesk Web Hosting Yönetim Paneli kurulum hizmetimiz vardır. İlgileniyorsanız bizimle iletişime geçin!
+</Note>
+
+<Info>
+  Eğer yardıma ihtiyaç duyarsanız [Discord](https://discord.gg/brolve) topluluğumuz üzerinden bir destek talebi oluşturarak bizimle iletişime geçin.
+</Info>

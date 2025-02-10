@@ -1,0 +1,56 @@
+---
+title: "Oyna-Play Alt Alan Adı Nasıl Yapılır?"
+description: "Brolve.com üzerinden satın alınan hizmete Minecraft sunucusu için .mc, .play, .oyna alt alan adı kaydı nasıl yapılır?"
+---
+
+<Tip>
+  Öncelikle eğer henüz bir hizmete sahip değilseniz [Nasıl Satın Alım Yapılır](https://docs.brolve.com/satin-alim) konulu makalemizi inceleyebilirsiniz.&#x20;
+</Tip>
+
+<Steps>
+  <Step title="CloudFlare Üzerinden:">
+    1. [CloudFlare Dashboard](https://dash.cloudflare.com)'a giriş yapınız.
+
+    2. İlgili alan adı sayfasını açınız.
+
+    3. Soldaki bardan DNS -> Records sekmesini açınız.
+
+    4. Add Record butonuna tıklayınız.
+
+    5. Açılan menüye aşağıdaki gibi bilgileri giriniz.
+
+       | Type: | Name: | IPv4 Address: | Proxy Status: |
+       | ----- | ----- | ------------- | ------------- |
+       | A     | play  | VDS IP Adresi | DNS-only      |
+
+    6. Save butonuna tıklayınız.
+  </Step>
+
+  <Step title="cPanel Üzerinden:">
+    * Hizmetinize bağlanın.
+
+    * cPanel anasayfası üzerindeki Etki Alanları kategorisindeki Zone Editor butonuna tıklayın.&#x20;
+
+    * İlgili alan adının sağında bulunan A Record butonuna tıklayınız.
+
+    * Açılan pop-up ekranda 1. boşluğa play.alanadi.com şeklinde alan adınızı, 2. boşluğa hizmetinizin IP adresini giriniz ve kaydediniz.
+  </Step>
+
+  <Step title="Plesk Üzerinden:">
+    * Hizmetinize bağlanın.
+
+    * İlgili alan adının menüsünde Barındırma ve DNS menüsünü açın ardından DNS butonuna tıklayınız.
+
+    * Üstte bulunan mavi Kayıt Ekleyin butonuna tıklayınız.
+
+    * Aşağıdaki değerlere sahip bir kayıt oluşturun ve kaydedin.
+
+    | Kayıt Tipi: | Alan Adı: | TTL:  | IP Adresi:    |
+    | ----------- | --------- | ----- | ------------- |
+    | A           | play      | 86400 | VDS IP Adresi |
+  </Step>
+</Steps>
+
+<Info>
+  Eğer yardıma ihtiyaç duyarsanız [Discord](https://discord.gg/brolve) topluluğumuz üzerinden bir destek talebi oluşturarak bizimle iletişime geçin.
+</Info>

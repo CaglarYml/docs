@@ -1,0 +1,81 @@
+---
+title: "cPanel Kurulumu"
+description: "Brolve.com üzerinden alınan sunucu hizmetine cPanel Web Yönetim Paneli nasıl kurulur?"
+---
+
+<Tip>
+  Öncelikle eğer henüz bir hizmete sahip değilseniz [Nasıl Satın Alım Yapılır](https://docs.brolve.com/satin-alim) konulu makalemizi inceleyebilirsiniz.&#x20;
+</Tip>
+
+<Warning>
+  Bu makale AlmaLinux temel alınarak hazırlanmıştır. Komutlar Ubuntu vb. işletim sistemi üzerinde çalışmaz. Makale hazırlanırken cPanel'in resmi kurulum makalesi esas alınmıştır.
+</Warning>
+
+<Steps>
+  <Step title="Gereksinimler">
+    **1) Lisans:**
+    [cpanel.net](https://cpanel.net) üzerinden bir adet lisans satın almanız gerekir.  Ardından lisansınızı hizmetinizin ip adresine yönlendirin.
+
+    **2) Ağ Gereksinimleri:**
+
+    * **Hostname:** bir adet hostname'iniz olmalı örneğin: cpanel.alanadi.com ve bu hostname hizmetinizin IP adresine yönlendirilmiş olmalıdır.
+
+    * **Güvenlik Duvarı:** Kurulum betiği kurulum sırasında gerekli bağlantı noktalarını(port) oluşturacağından ötürü AlmaLinux'un güvenlik duvarı servisini devre dışı bırakmanız önerilir.
+
+    **3) Sistem Gereksinimleri:**
+
+    | Sürüm:      | RAM (GB)                            | Disk Alanı (GB)                       |
+    | ----------- | ----------------------------------- | ------------------------------------- |
+    | AlmaLinux 8 | **Minimum**: 2GB, **Önerilen**: 4GB | **Minimum**: 20GB, **Önerilen**: 40GB |
+    | AlmaLinux 9 | **Minimum**: 2GB, **Önerilen**: 4GB | **Minimum**: 20GB, **Önerilen**: 40GB |
+
+    *Clam AntiVirus Tarayıcısı (ClamAV) yükleyecekseniz minimum 3GB RAM belleğe sahip olmanız önerilir.*
+
+    **4) SELinux:**
+    Sağlıklı bir kurulum için SELinux'u mutlaka devre dışı bırakmalısınız.
+
+    **5) Perl Kurulumu:**
+    Kurulum öncesi Perl yazılımı mutlaka kurulmuş vaziyette olmalıdır.
+  </Step>
+
+  <Step title="Gereksinimlerin Hazırlanması">
+    **2.2) Güvenlik Duvarı(Firewall):**
+    Güvenlik duvarını devre dışı bırakmak için aşağıdaki komutları giriniz.
+
+    ```bash
+    iptables-save > ~/firewall.rules
+    systemctl stop firewalld.service
+    systemctl disable firewalld.service
+    ```
+
+    **4) SELinux:**
+
+    SELinux'u devre dışı bırakmak için `sudo nano /etc/selinux/config` komutuyla konfigürasyon dosyasına ulaşın ardından `SELINUX=`  parametresini enabled yerine disabled olarak düzeltin, dosyayı kaydedin ve sunucuyu yeniden başlatın.
+
+    **5) Perl Kurulumu:**
+
+    ```bash
+    yum -y install perl
+    ```
+  </Step>
+
+  <Step title="cPanel Kurulum">
+    Gereksinimleri tamamladıktan sonra aşağıdakikomutu giriniz. Resmi cPanel kurulum betiği kurulum sağlayacaktır. **ssh bağlantınızda root olarak giriş yapmanız gerekmektedir.** Eğer root olarak giriş yapmadıysanız `sudo su` komutunu giriniz.
+
+    ```bash
+    cd /home && curl -o latest -L https://securedownloads.cpanel.net/latest && sh latest
+    ```
+
+    Sonda cPanel üzerinde gereken SQL, Apache, Ağ konfigürasyonlarını yapınız.
+  </Step>
+
+  <Step title="Hata Tanılama&Düzeltme">
+    İşlem sırasında aldığınız hatalar için bizimle iletişime geçebilirsiniz veya resmi cPanel hata tanılama dökümantasyonunu inceleyebilirsiniz. [**cPanel Hata Tanılama**](https://docs.cpanel.net/installation-guide/troubleshoot-your-installation/)
+  </Step>
+</Steps>
+<Note>
+  Sunucu hizmetinize cPanel Web Hosting Yönetim Paneli kurulum hizmetimiz vardır. İlgileniyorsanız bizimle iletişime geçin!
+</Note>
+<Info>
+  Eğer yardıma ihtiyaç duyarsanız [Discord](https://discord.gg/brolve) topluluğumuz üzerinden bir destek talebi oluşturarak bizimle iletişime geçin.
+</Info>

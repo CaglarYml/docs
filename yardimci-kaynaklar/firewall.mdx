@@ -1,0 +1,74 @@
+---
+title: "Güvenlik Duvarı(Firewall) Aktifleştirme"
+description: "Tarafımızca sizlere kolaylık sağlamak adına hizmetinizde kullanmak için güvenlik duvarı(firewall) açma ve kapama betikleri."
+---
+
+## Windows:
+
+<Info>
+  Bu betikler  Windows 8, 8.1, 10, 11 ve Windows Server 2012, 2012R2, 2016, 2019, 2022 sürümlerinde çalışır.
+</Info>
+
+<CodeGroup>
+  ```powershell FirewallOn.bat
+  @echo off
+  title Brolve - Guvenlik Duvari Betigi
+  echo Bu betik Brolve Devs. tarafindan musteriler icin hazirlanmistir.
+  echo Devam etmek icin ENTER tusuna tiklayin ardindan
+  echo gerekli yonlendirmeler yapilacaktir.
+  PAUSE
+  cls
+  netsh firewall set opmode enable
+  cls
+
+  echo Guvenlik duvari basariyla acilmistir. Betik kapatiliyor...
+  TIMEOUT /T 10 /NOBREAK
+  exit
+
+  ```
+
+  ```powershell FirewallOff.bat
+  @echo off
+  title Brolve - Guvenlik Duvari Betigi
+  echo Bu betik Brolve Devs. tarafindan musteriler icin hazirlanmistir.
+  echo Devam etmek icin ENTER tusuna tiklayin ardindan
+  echo gerekli yonlendirmeler yapilacaktir.
+  PAUSE
+  cls
+  netsh firewall set opmode disable
+  cls
+
+  echo Guvenlik duvari basariyla kapatilmistir. Betik kapatiliyor...
+  TIMEOUT /T 10 /NOBREAK
+  exit
+  ```
+</CodeGroup>
+
+## Linux Distroları:
+
+<Info>
+  Betiklerin çalışması için hizmetinizde Uncomplicated Firewall(UFW)  yüklü olması gerekir.  Bu betik en iyi Ubuntu sürümleri üzerinde çalışır.
+</Info>
+
+<CodeGroup>
+  ```bash FirewallOn.sh
+  echo Bu betik Brolve Devs. tarafindan musteriler icin hazirlanmistir.
+  echo Gerekli yonlendirmeler yapilacaktir.
+  echo .
+  ufw allow 22
+  yes | sudo ufw enable
+  echo Uncompiled Firewall (UFW) aktif olmustur.
+
+  ```
+
+  ```bash FirewallOff.sh
+  echo Bu betik Brolve Devs. tarafindan musteriler icin hazirlanmistir.
+  echo Gerekli yonlendirmeler yapilacaktir.
+  echo .
+  yes | sudo ufw disable
+  echo Uncompiled Firewall (UFW) aktif olmustur.
+  ```
+</CodeGroup>
+<Info>
+  Eğer yardıma ihtiyaç duyarsanız [Discord](https://discord.gg/brolve) topluluğumuz üzerinden bir destek talebi oluşturarak bizimle iletişime geçin.
+</Info>

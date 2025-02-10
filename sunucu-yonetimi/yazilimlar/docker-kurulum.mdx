@@ -1,0 +1,82 @@
+---
+title: "Docker Kurulum"
+description: "Brolve.com üzerinden alınan sunucu hizmetine Docker nasıl kurulur?"
+---
+
+<Tip>
+  Öncelikle eğer henüz bir hizmete sahip değilseniz [Nasıl Satın Alım Yapılır](https://docs.brolve.com/satin-alim) konulu makalemizi inceleyebilirsiniz.&#x20;
+</Tip>
+
+<Warning>
+  Makale hazırlanırken Plesk'in resmi kurulum makalesi esas alınmıştır.
+</Warning>
+
+### Windows:
+
+<Steps>
+  <Step title="Kurulum">
+    * [https://download.docker.com/win/static/stable/x86\_64](https://download.docker.com/win/static/stable/x86_64) üzerinden dosyayı indiriniz.
+
+    * Aşağıdaki komut ile dosyayı arşivden çıkartın.
+
+      ```powershell
+      PS C:\> Expand-Archive /path/to/<FILE>.zip -DestinationPath $Env:ProgramFiles
+      ```
+
+    * Aşağıdaki komut ile Docker servisini kaydedip, Docker motorunu başlatın.
+
+      ```powershell
+      PS C:\> &$Env:ProgramFiles\Docker\dockerd --register-service
+      PS C:\> Start-Service docker
+      ```
+  </Step>
+
+  <Step title="Kurulumu Doğrulama">
+    * `hello-world` imajıyla kurulumu doğrulayın.```powershell
+      PS C:\> &$Env:ProgramFiles\Docker\docker run hello-world:nanoserver
+      ```
+  </Step>
+</Steps>
+
+### Linux (Ubuntu):
+
+<Steps>
+  <Step title="Docker'ın Apt Reposunu Hazırlama">
+    * Aşağıdaki komutları sırayla giriniz.
+
+    ```bash
+     # Docker'ın resmi GPG anahtarını ekleme:
+     sudo apt-get update
+     sudo apt-get install ca-certificates curl
+     sudo install -m 0755 -d /etc/apt/keyrings
+     sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+     sudo chmod a+r /etc/apt/keyrings/docker.asc
+     #Repoyu Apt kaynaklarına ekleme
+     echo 
+     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu 
+     $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | 
+     sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+     sudo apt-get update
+    ```
+  </Step>
+
+  <Step title="Kurulum">
+    * Aşağıdaki komut ile kurulumu başlatın.
+
+    ```bash
+    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    ```
+  </Step>
+
+  <Step title="Kurulumu Doğrulama">
+    * `hello-world` imajıyla kurulumu doğrulayın.
+
+    ```powershell
+      sudo docker run hello-world
+    ```
+  </Step>
+</Steps>
+
+<Info>
+  Eğer yardıma ihtiyaç duyarsanız [Discord](https://discord.gg/brolve) topluluğumuz üzerinden bir destek talebi oluşturarak bizimle iletişime geçin.
+</Info>

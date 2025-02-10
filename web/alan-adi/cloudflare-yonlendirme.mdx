@@ -1,0 +1,42 @@
+---
+title: "Alan Adı Hizmetini CloudFlare'e Yönlendirme"
+description: "Brolve.com üzerinden aldığınız alan adı hizmetinin DNS(Dynamic Nameserver) sağlayıcısını CloudFlare üzerine nasıl yönlendirirsiniz?"
+---
+
+<Tip>
+  Öncelikle eğer henüz bir hizmete sahip değilseniz [Nasıl Satın Alım Yapılır](https://docs.brolve.com/satin-alim) konulu makalemizi inceleyebilirsiniz.&#x20;
+</Tip>
+
+<Steps>
+  <Step title="CloudFlare Kaydolun" stepNumber="1">
+    Tarayıcı üzerinden [**CloudFlare Dashboard**](https://dash.cloudflare.com) (https://dash.cloudflare.com) adresine ulaşın ardından e-posta ve şifre bilgilerinizle kaydolun.
+  </Step>
+
+  <Step title="CloudFlare üzerine Alan Adı Ekleme">
+    Cloudflare anasayfasında bulunan Add a domain butonuna tıklayın. İlgili kısma alanadınızı alanadi.com şeklinde girin ve Continue butonuna tıklayınız. Gelen ekrandan Free planı seçin ve Continue butonuna tıklayınız.
+  </Step>
+
+  <Step title="Name Server Adresleri">
+    Soldaki bardan Overview butonuna tıklayın ve orada 2 adet xxx.ns.cloudflare.com şeklinde nameserver bulunacaktır. O nameserver adreslerini kopyalayın.
+  </Step>
+
+  <Step title="Giriş Yapın">
+    Tarayıcı üzerinden [**müşteri paneli**](https://brolve.com/panel/giris-yap)ne (brolve.com/panel) ulaşın ardından e-posta ve şifre bilgilerinizle giriş yapın.
+  </Step>
+
+  <Step title="Müşteri Paneli">
+    Müşteri paneli üzerinden solda bulunan bardan [**Alan Adlarım**](https://brolve.com/panel/hesabim/urun-ve-hizmetlerim/domain) sekmesine ulaşın. İlgili hizmeti bulun ve **Yönet** butonuna tıklayınız.
+  </Step>
+
+  <Step title="Ad Sunucularını (NS) Değiştirme">
+    Üste bulunan butonlardan **DNS** butonuna tıklayın ardından ise Name Server Güncelle butonuna tıklayın. 3. adımda kopyaladığınız nameserver adreslerini sırayla ilgili kısımlara yapıştırın. Son olarak Name Server Güncelle butonuna tıklayınız.
+  </Step>
+</Steps>
+
+<Info>
+  İşlemin küresel olarak tüm ISS'ler üzerinde yayınlanması 0-24 saat sürecektir. Eğer alan adınız .com.tr, .net.tr gibi yerel alan adı ise işlem 0-48 saate kadar uzayabilir.
+</Info>
+
+<Info>
+  Eğer yardıma ihtiyaç duyarsanız [Discord](https://discord.gg/brolve) topluluğumuz üzerinden bir destek talebi oluşturarak bizimle iletişime geçin.
+</Info>

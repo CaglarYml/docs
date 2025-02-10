@@ -1,0 +1,49 @@
+---
+title: 'Windows VM Üzerinde IP Tanımlama'
+description: 'Kurulan Windows Server sanal makineye statik IP adresi nasıl tanımlanır.'
+---
+
+<Tip>
+  Öncelikle eğer henüz bir hizmete sahip değilseniz [Nasıl Satın Alım Yapılır](https://docs.brolve.com/satin-alim) konulu makalemizi inceleyebilirsiniz.&#x20;
+</Tip>
+
+<Steps>
+  <Step title="IP Adresi Edinme">
+    Öncelikle bizle iletişime geçerek bir adet IP adresi edinin. Veya hizmetinizin beraberinde gelen hediye IP adreslerini kullanabilirsiniz.
+  </Step>
+
+  <Step title="Sanal Makineye Erişin">
+    Vmware/Proxmox paneliniz üzerinden kurduğunuz Windows Server sanal makineye erişin.
+  </Step>
+
+  <Step title="IP Adresi Tanımlama">
+    * **Denetim Masası**'na erişiniz.
+
+    * **Ağ ve Internet** sonrasında **Ağ ve Paylaşım Merkezi**'ne erişin.
+
+    * Bulunan bağlantı ve adaptörler arasından kullandığınız bağlantıya tıklayın.
+
+    * Sol altta bulunan **Özellikler** butonuna tıklayınız.
+
+    * Gelen pop-up ekran üzerinde listede bulunan butonlardan IPv4 butonuna tıklayınız.
+
+    * 1\. kısımda bulunan **Aşağıdaki IP adreslerini kullan seçeneğini seçin** ve açılan yerdeki **IPv4 adresi, Alt ağ maskesi(subnet) ve Varsayılan ağ geçidi(gateway)** kısımlarını uygunca doldurunuz.
+
+    * 2\. kısımda bulunan **Aşağıdaki DNS sunucu adreslerini kullan** seçeneğini seçin ve açılan yere DNS adreslerinizi uygunca doldurunuz. Bu kısma public veya private dns sunucularınızı girebilirsiniz aşağıda bazı public DNS adresleri mevcuttur.
+      &#x20; \-  **Google DNS: 8.8.8.8 | 8.8.4.4**
+
+      * **CloudFlare DNS: 1.1.1.1 | 1.0.0.1**
+
+      * **OpenDNS: 208.67.222.222 | 208.67.220.220**
+
+      * **YandexDNS: 77.88.8.8 | 77.88.8.1**
+
+      * **Comodo Secure DNS: 8.26.56.26 | 8.20.247.20**
+
+    * İşlem tamamlanmıştır. **Tamam** tuşuna basarak çıkabilirsiniz. Hiçbir hata almadığınız taktirde şuan internete bağlanabilmeniz gerekmektedir.
+  </Step>
+</Steps>
+
+<Info>
+  Eğer yardıma ihtiyaç duyarsanız [Discord](https://discord.gg/brolve) topluluğumuz üzerinden bir destek talebi oluşturarak bizimle iletişime geçin.
+</Info>

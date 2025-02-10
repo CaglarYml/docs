@@ -1,0 +1,124 @@
+---
+title: "Java Kurulum"
+description: "Tarafımızca sizlere kolaylık sağlamak adına hizmetinizde kullanmak için Java yazılımını yükleme ve kaldırma betikleri."
+---
+
+<Note>
+  Betiklerimizde Oracle tarafından geliştirilen Java yerine daha optimize olan Eclipse tarafından geliştirilen Adoptium kullanılmıştır.
+</Note>
+
+<Info>
+  Bu betikler en iyi Windows 8 +, Windows Server 2010R2 + ve Ubuntu işletim sistemlerinde çalışır. Çalışması için hizmetinizde [cURL](https://curl.se/download.html) programı yüklü olmalıdır.
+</Info>
+
+<CodeGroup>
+  ```powershell javasetup.bat
+  @echo off
+  setlocal enabledelayedexpansion
+
+  title Brolve - Java Kurma Betigi
+
+  echo Bu betik Brolve Devs. tarafindan musteriler icin hazirlanmistir.
+  echo Devam etmek icin ENTER tusuna tiklayin ardindan
+  echo gerekli yonlendirmeler yapilacaktir.
+  PAUSE
+  cls
+
+  :: Kullanıcıdan Java sürümünü alma
+  echo Hangi Java surumunu indirmek istiyorsunuz? (Ornek: 17)
+  set /p JAVA_VERSION="Java Surumu: "
+
+  :: Eclipse Adoptium'dan indirme URL'si oluşturma
+  set JAVA_URL=https://api.adoptium.net/v3/binary/latest/!JAVA_VERSION!/ga/windows/x64/jdk/hotspot/normal/eclipse
+  set JAVA_INSTALLER=OpenJDK-!JAVA_VERSION!-windows-x64.exe
+
+  :: Java'yı indirme
+  curl -o !JAVA_INSTALLER! !JAVA_URL!
+  if %errorlevel% neq 0 (
+      echo Java indirilemedi. Lutfen surumu kontrol edin veya internet baglantinizi kontrol edin.
+      exit /b 1
+  )
+
+  :: Java'yı yükleme
+  echo Java yukleniyor...
+  start /wait !JAVA_INSTALLER! /s
+  if %errorlevel% neq 0 (
+      echo Java yuklenirken hata olustu.
+      exit /b 1
+  )
+
+  :: PATH değişkenine ekleme
+  echo PATH degiskeni guncelleniyor...
+  setx PATH "%PATH%;C:\Program Files\Eclipse Adoptium\jdk-!JAVA_VERSION!-hotspot\bin" /M
+
+  :: Yükleme dosyasını silme
+  delete !JAVA_INSTALLER!
+
+  :: Kurulumun başarıyla tamamlandığını kontrol etme
+  java -version
+  if %errorlevel% neq 0 (
+      echo Java kurulumu basarisiz.
+      exit /b 1
+  ) else (
+      echo Java basariyla kuruldu!
+  )
+
+  pause
+  endlocal
+
+  ```
+
+  ```bash javasetup.sh
+  #!/bin/bash
+
+  set -e
+
+  echo "Brolve - Java Kurma Betigi"
+  echo "Bu betik Brolve Devs. tarafindan musteriler icin hazirlanmistir."
+  echo "Devam etmek icin ENTER tusuna basiniz."
+  read -r
+  clear
+
+  # Kullanıcıdan Java sürümünü alma
+  echo "Hangi Java surumunu indirmek istiyorsunuz? (Ornek: 17, 21)"
+  read -r JAVA_VERSION
+
+  # Eclipse Adoptium'dan indirme URL'si oluşturma
+  JAVA_URL="https://api.adoptium.net/v3/binary/latest/${JAVA_VERSION}/ga/linux/x64/jdk/hotspot/normal/eclipse"
+  JAVA_INSTALLER="OpenJDK-${JAVA_VERSION}-linux-x64.tar.gz"
+
+  # Java'yı indirme
+  echo "Java indiriliyor..."
+  curl -o "$JAVA_INSTALLER" "$JAVA_URL"
+  if [ $? -ne 0 ]; then
+      echo "Java indirilemedi. Lutfen surumu kontrol edin veya internet baglantinizi kontrol edin."
+      exit 1
+  fi
+
+  # Java'yı yükleme
+  echo "Java kuruluyor..."
+  tar -xvzf "$JAVA_INSTALLER" -C /opt
+
+  # PATH değişkenine ekleme
+  JAVA_DIR=$(tar -tf "$JAVA_INSTALLER" | head -n 1 | cut -d'/' -f1)
+  export PATH="/opt/${JAVA_DIR}/bin:$PATH"
+  echo "export PATH=/opt/${JAVA_DIR}/bin:\$PATH" >> ~/.bashrc
+  source ~/.bashrc
+
+  # Yükleme dosyasını silme
+  echo "Gereksiz dosyalar siliniyor..."
+  rm "$JAVA_INSTALLER"
+
+  # Kurulumun başarıyla tamamlandığını kontrol etme
+  if java -version; then
+      echo "Java basariyla kuruldu!"
+  else
+      echo "Java kurulumu basarisiz."
+      exit 1
+  fi
+
+  ```
+</CodeGroup>
+<Info>
+  Eğer yardıma ihtiyaç duyarsanız [Discord](https://discord.gg/brolve) topluluğumuz üzerinden bir destek talebi oluşturarak bizimle iletişime geçin.
+</Info>

@@ -1,0 +1,28 @@
+---
+title: "cPanel Hizmetinde Alt Alan Adı Oluşturma"
+description: "Brolve.com üzerinden satın aldığınız cPanel tabanlı web hosting hizmeti üzerinde nasıl alt alan adı(subdomain) oluşturursunuz?"
+---
+<Tip>
+  Öncelikle eğer henüz bir hizmete sahip değilseniz [Nasıl Satın Alım Yapılır](https://docs.brolve.com/satin-alim) konulu makalemizi inceleyebilirsiniz.&#x20;
+</Tip>
+<Steps>
+  <Step title="Hizmete Bağlanma" stepNumber="1">
+    [**cPanel Hizmetine Giriş Yapma**](https://docs.brolve.com/web/cpanel/cpanele-baglanma) **konulu makalemizde gösterildiği üzere hizmete giriş yapın.**
+  </Step>
+
+  <Step title="cPanel">
+    cPanel hizmetinin anasayfası üzerinde **Etki Alanları (Domains)** kategorisi içinde bulunan **Etki Alanları (Domains)** butonuna tıklayınız.
+  </Step>
+
+  <Step title="Etki Alanları">
+    **Create A New Domain (Yeni Bir Etki Alanı Oluştur)** butonuna tıklayınız. Etki Alanı kısmına oluşturacağınız alt alan adını alt.alanadiniz.com şeklinde giriniz. Document Root kısmına alt alan adının kullanacağı klasör konumunu giriniz ve son olarak Gönder butonuna tıklayınız.
+  </Step>
+
+  <Step title="DNS Düzenlemesi">
+    Eğer alan adınız direkt olarak cPanel hizmetinize yönlendirilmiş haldeyse ekstra bir işlem yapmanıza gerek yoktur. Lâkin CloudFlare gibi bir DNS Sağlayıcısı kullanıyorsanız, CloudFlare DNS sekmesi üzerinden aşağıdaki değerlere sahip bir kayıt oluşturmanız gerekmektedir.
+
+    | Type: | Name:      | Target:        | Proxy Status: |
+    | ----- | ---------- | -------------- | ------------- |
+    | CNAME | altalanadi | alanadiniz.com | Proxied       |
+  </Step>
+</Steps>

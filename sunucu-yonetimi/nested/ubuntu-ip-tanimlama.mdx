@@ -1,0 +1,71 @@
+---
+title: 'Ubuntu VM Üzerinde IP Tanımlama'
+description: 'Kurulan Ubuntu Server sanal makineye statik IP adresi nasıl tanımlanır.'
+---
+
+<Tip>
+  Öncelikle eğer henüz bir hizmete sahip değilseniz [Nasıl Satın Alım Yapılır](https://docs.brolve.com/satin-alim) konulu makalemizi inceleyebilirsiniz.&#x20;
+</Tip>
+
+<Warning>
+  Bu makale Ubuntu Server 18.04 sonrası için geçerlidir. Ubuntu Server 18.04 ve öncesi için geçerli değildir.
+</Warning>
+
+<Steps>
+  <Step title="IP Adresi Edinme">
+    Öncelikle bizle iletişime geçerek bir adet IP adresi edinin. Veya hizmetinizin beraberinde gelen hediye IP adreslerini kullanabilirsiniz.
+  </Step>
+
+  <Step title="Sanal Makineye Erişin">
+    Vmware/Proxmox paneliniz üzerinden kurduğunuz Windows Server sanal makineye erişin.
+  </Step>
+
+  <Step title="IP Adresi Tanımlama">
+    Aşağıdaki komut ile ağ konfigürasyon dosyasını açınız.
+
+    ```bash
+    sudo nano /etc/netplan/50-cloud-init.yaml
+    ```
+
+    Bu dosyada `dhcp4:yes` yazıyor ise DHCP ile ip adresi alıyorsunuz demektir. Eğer statik ip adresi yapmak isterseniz aşağıdaki şekilde dosyayı değiştirebilirsiniz. ip-adresi, Ağ Geçidi ve DNS Adresleri yazan kısımları düzenleyiniz. Aşağıdaki dosya Google DNS kullanır. Bazı Public DNS adreslerini aşağıya bırakıyorum.
+
+    ```bash
+    network:
+      version: 2
+      ethernets:
+        eth0:
+          dhcp4: no
+          addresses: [ip-adresi/24]
+          gateway4: 192.168.0.1 # Ağ Geçidi
+          nameservers:
+            addresses: [8.8.8.8, 8.8.4.4] # DNS Adresleri
+    ```
+
+    * **CloudFlare DNS: 1.1.1.1 | 1.0.0.1**
+
+    * **Google DNS: 8.8.8.8 | 8.8.4.4**
+
+    * **OpenDNS: 208.67.222.222 | 208.67.220.220**
+
+    * **YandexDNS: 77.88.8.8 | 77.88.8.1**
+
+    * **Comodo Secure DNS: 8.26.56.26 | 8.20.247.20**
+
+    En sonda ise dosyayı kaydedin.
+  </Step>
+
+  <Step title="Değişikliklerin Uygulanması">
+    Değişikliklerin uygulanması adına aşağıdaki komutları giriniz.
+
+    ```bash
+    sudo netplan generate
+    sudo netplan apply
+    ```
+
+
+  </Step>
+</Steps>
+
+<Info>
+  Eğer yardıma ihtiyaç duyarsanız [Discord](https://discord.gg/brolve) topluluğumuz üzerinden bir destek talebi oluşturarak bizimle iletişime geçin.
+</Info>

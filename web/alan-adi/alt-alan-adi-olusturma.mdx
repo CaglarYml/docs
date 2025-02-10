@@ -1,0 +1,40 @@
+---
+title: "Alt Alan Adı Oluşturma"
+description: "Brolve.com üzerinden aldığınız alan adı hizmetine nasıl alt alan adı oluşturursunuz?"
+---
+
+<Tip>
+  Öncelikle eğer henüz bir hizmete sahip değilseniz [Nasıl Satın Alım Yapılır](https://docs.brolve.com/satin-alim) konulu makalemizi inceleyebilirsiniz.&#x20;
+</Tip>
+
+<Steps>
+  <Step title="CloudFlare Üzerinden:">
+    1. [CloudFlare Dashboard](https://dash.cloudflare.com)'a giriş yapınız.
+
+    2. İlgili alan adı sayfasını açınız.
+
+    3. Soldaki bardan DNS -> Records sekmesini açınız.
+
+    4. Add Record butonuna tıklayınız.
+
+    5. Açılan menüye aşağıdaki gibi bilgileri giriniz.
+
+       | Type: | Name:      | Target:        | Proxy Status: |
+       | ----- | ---------- | -------------- | ------------- |
+       | CNAME | altalanadi | alanadiniz.com | Proxied       |
+
+    6. Save butonuna tıklayınız.
+  </Step>
+
+  <Step title="cPanel Üzerinden:">
+    [**cPanel Hizmetinde Alt Alan Adı Oluşturma**](https://docs.brolve.com/web/cpanel/alt-alan-adi-olusturma)
+  </Step>
+
+  <Step title="Plesk Üzerinden:">
+    [**Plesk Hizmetinde Alt Alan Adı Oluşturma**](https://docs.brolve.com/web/plesk/alt-alan-adi-olusturma)
+  </Step>
+</Steps>
+
+<Info>
+  Eğer yardıma ihtiyaç duyarsanız [Discord](https://discord.gg/brolve) topluluğumuz üzerinden bir destek talebi oluşturarak bizimle iletişime geçin.
+</Info>
