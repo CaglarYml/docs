@@ -66,6 +66,13 @@
       ]
     },
     {
+      "group": "Yardımcı Makaleler",
+      "pages": [
+        "yardimci-makaleler/almanya-vs-turkiye",
+        "yardimci-makaleler/plesk-vs-cpanel"
+      ]
+    },
+    {
       "group": "Yardımcı Kaynaklar",
       "pages": [
         "yardimci-kaynaklar/java-kurulum",
