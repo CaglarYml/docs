@@ -125,18 +125,6 @@
       ]
     },
     {
-      "group": "FiveM Sunucu",
-      "pages": [
-        "oyun-sunucu/fivem/sunucu-kurulum"
-      ]
-    },
-    {
-      "group": "Rust Sunucu",
-      "pages": [
-        "oyun-sunucu/rust/sunucu-kurulum"
-      ]
-    },
-    {
       "group": "cPanel",
       "pages": [
         "web/cpanel/cpanele-baglanma",
